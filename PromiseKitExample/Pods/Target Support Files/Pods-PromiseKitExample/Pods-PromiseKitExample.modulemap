@@ -1,0 +1,6 @@
+framework module Pods_PromiseKitExample {
+  umbrella header "Pods-PromiseKitExample-umbrella.h"
+
+  export *
+  module * { export * }
+}
