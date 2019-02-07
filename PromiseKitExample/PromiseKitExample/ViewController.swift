@@ -50,27 +50,6 @@ class ViewController: UIViewController {
         return Guarantee()
     }
     
-    /*
-    private func downloadPhotos() {
-        //  1. Show preloading animation
-        self.activityIndicator.startAnimating()
-        //  2. Fetch and serialize json response
-        Alamofire.request(photosURL, method: .get).validate().responseData { (data) in
-            guard let data = data.result.value else { return }
-            guard let photos = try? JSONDecoder().decode([Photo].self, from: data) else { return }
-            //  3. Download photos
-            for photo in photos {
-                guard let photoUrl = URL(string: photo.url) else { return }
-                guard let photoData = try? Data(contentsOf: photoUrl) else { return }
-                guard let photoImage = UIImage(data: photoData) else { return }
-                self.photos.append(photoImage)
-            }
-            // 4. Hide preloading animation and update the UI
-            self.activityIndicator.stopAnimating()
-            self.photoCollectionView.reloadData()
-        }
-    }
-    */
     
     private func fetchJSON() -> Promise<[Photo]> {
         return Promise { seal in
@@ -87,8 +66,6 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-    
     
     private func downloadPhotos(photos: [Photo]) -> Promise<[UIImage]> {
         return Promise { seal in
@@ -121,16 +98,6 @@ class ViewController: UIViewController {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 enum PhotoError: Error {
     case ConvertToData
     case PhotoDecoding
@@ -147,11 +114,6 @@ struct Photo: Codable {
     let url: String
     let thumbnailUrl: String
 }
-
-
-
-
-
 
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
